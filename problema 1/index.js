@@ -11,7 +11,7 @@ async function initEmployeeTable(){
 
 async function getAllEmployees(){
     try{
-    const response = await fetch(url+'employees',{
+    const response = await fetch(url+"employees",{
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -29,12 +29,27 @@ async function getAllEmployees(){
 }
 
 async function getEmployee(id){
-
+    try{
+        const response = await fetch(url+"employees/"+id,{
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            redirect:"follow",
+            referrerPolicy:"no-referrer"
+        });
+        return response.json();
+        }catch(error){
+            console.log(error);
+        }
 }
 
 async function postEmployee(data = {}){
     try{
-        const response = await fetch(url+'create',{
+        const response = await fetch(url+"create",{
             method:"POST",
             mode: "cors",
             cache: "no-cache",
@@ -53,7 +68,22 @@ async function postEmployee(data = {}){
 }
 
 async function putEmployee(id, data={}){
-    
+    try{
+        const response = await fetch(url+"update/"+id,{
+            method:"POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer"
+        });
+        return response.json();
+    }catch(error){
+        console.log(error);
+    }
 }
 
 async function deleteEmployee(id){
