@@ -4,21 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
     <script src="index.js"></script>
-    <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
-    <title>Problema 1</title>
+    <title>Login</title>
 </head>
-    <body>
-        <table id="employeeTable">
-            <th>
-                <tr>Name</tr>
-                <tr>Salary</tr>
-                <tr>Age</tr>
-            </th>
-            <td>
-                
-            </td>
-        </table>
-    </body>
+    <form>
+        <label for="usernameInput">Usuário:</label><br>
+        <input type="text" name="username" id="usernameInput"><br>
+        <label for="usernameInput">Senha:</label><br>
+        <input type="text" name="password" id="passwordInput"><br>
+        <button type="button" onclick="login()">Login</button>
+    </form>
 </html>
