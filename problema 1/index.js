@@ -11,7 +11,7 @@ async function initEmployeeTable(){
 
 async function getAllEmployees(){
     try{
-    const response = await fetch(url+"employees",{
+    const response = await fetch(url+"employee",{
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -30,7 +30,7 @@ async function getAllEmployees(){
 
 async function getEmployee(id){
     try{
-        const response = await fetch(url+"employees/"+id,{
+        const response = await fetch(url+"employee/"+id,{
             method: "GET",
             mode: "cors",
             cache: "no-cache",
