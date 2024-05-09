@@ -1,3 +1,6 @@
-table{
-    column-rule-style: solid;
+.empTable th,
+.empTable td, 
+.empTable tr{
+    padding: 5px;
+    outline: 1px black;
 }
