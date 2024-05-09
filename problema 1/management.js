@@ -1,12 +1,12 @@
-const url = 'http://localhost:3000/employees/';
+const url = 'http://localhost:3000/employees';
 var editing = false;
 var beingEdited = 0;
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     initEmployeeTable();
 })
 
-async function initEmployeeTable(){
+async function initEmployeeTable() {
     let empTable = document.getElementById("employeeTable");
     let emps = await getAllEmployees();
     for (let i = 0; i < emps.length; i++) {
@@ -25,8 +25,8 @@ async function initEmployeeTable(){
         let deleteBtn = document.createElement('button');
         let deleteBtnText = document.createTextNode('Delete');
 
-        editBtn.addEventListener('click', async function(){
-            if(editing == false){
+        editBtn.addEventListener('click', async function () {
+            if (editing == false) {
                 editing = true;
                 beingEdited = emps[i].id;
                 let editTray = document.getElementById(emps[i].id);
@@ -34,19 +34,19 @@ async function initEmployeeTable(){
                 let nameInput = document.createElement('input');
                 nameInput.setAttribute('type', 'text');
                 nameInput.value = emps[i].name;
-                nameInput.id = "nameInput"+emps[i].id;;
+                nameInput.id = "nameInput" + emps[i].id;;
                 editTray.cells[0].appendChild(nameInput);
 
                 let salaryInput = document.createElement('input');
                 salaryInput.setAttribute('type', 'number');
                 salaryInput.value = emps[i].salary;
-                salaryInput.id = "salaryInput"+emps[i].id;;
+                salaryInput.id = "salaryInput" + emps[i].id;;
                 editTray.cells[1].appendChild(salaryInput);
 
                 let ageInput = document.createElement('input');
                 ageInput.setAttribute('type', 'number');
                 ageInput.value = emps[i].age;
-                ageInput.id = "ageInput"+emps[i].id;;
+                ageInput.id = "ageInput" + emps[i].id;;
                 editTray.cells[2].appendChild(ageInput);
 
                 nameTxt.remove();
@@ -57,31 +57,33 @@ async function initEmployeeTable(){
                 saveBtnText = document.createTextNode('Save');
                 editBtn.appendChild(saveBtnText);
             }
-            else if(editing == true && emps[i].id != beingEdited){
+            else if (editing == true && emps[i].id != beingEdited) {
                 location.reload()
             }
-            else{
+            else {
                 editing = false;
-                
-                let nameInput = document.getElementById("nameInput"+emps[i].id);
-                let salaryInput = document.getElementById("salaryInput"+emps[i].id);
-                let ageInput = document.getElementById("ageInput"+emps[i].id);
+
+                let nameInput = document.getElementById("nameInput" + emps[i].id);
+                let salaryInput = document.getElementById("salaryInput" + emps[i].id);
+                let ageInput = document.getElementById("ageInput" + emps[i].id);
 
                 let newName = nameInput.value;
                 let newSalary = salaryInput.value;
                 let newAge = ageInput.value;
 
-                await postEmployee({id:emps[i].id,
-                    name:newName,
-                    salary:newSalary,
-                    age:newAge
-                })
+                await putEmployee(emps[i].id,
+                    {
+                        id: emps[i].id,
+                        name: newName,
+                        salary: newSalary,
+                        age: newAge
+                    })
 
                 window.location.reload();
             }
         });
 
-        deleteBtn.addEventListener('click', async function(){
+        deleteBtn.addEventListener('click', async function () {
             let id = emps[i].id;
             let dTray = document.getElementById(id);
             dTray.remove();
@@ -107,28 +109,19 @@ async function initEmployeeTable(){
     }
 }
 
-async function getAllEmployees(){
-    try{
-    const response = await fetch(url,{
-        method: "GET",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        redirect:"follow",
-        referrerPolicy:"no-referrer"
-    });
-    return response.json();
-    }catch(error){
-        console.log(error);
-    }
+async function addEmployee() {
+    let name = document.getElementById("nameForm").value;
+    let salary = document.getElementById("salaryForm").value;
+    let age = document.getElementById("ageForm").value;
+
+    await postEmployee({ name: name, salary: salary, age: age })
+
+    window.location.href = 'management.html';
 }
 
-async function getEmployee(id){
-    try{
-        const response = await fetch(url+id,{
+async function getAllEmployees() {
+    try {
+        const response = await fetch(url, {
             method: "GET",
             mode: "cors",
             cache: "no-cache",
@@ -136,19 +129,38 @@ async function getEmployee(id){
             headers: {
                 "Content-Type": "application/json"
             },
-            redirect:"follow",
-            referrerPolicy:"no-referrer"
+            redirect: "follow",
+            referrerPolicy: "no-referrer"
         });
         return response.json();
-        }catch(error){
-            console.log(error);
-        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-async function postEmployee(data = {}){
-    try{
-        const response = await fetch(url,{
-            method:"POST",
+async function getEmployee(id) {
+    try {
+        const response = await fetch(url + "/" + id, {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer"
+        });
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function postEmployee(data = {}) {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
             mode: "cors",
             cache: "no-cache",
             credentials: "same-origin",
@@ -160,33 +172,34 @@ async function postEmployee(data = {}){
             body: JSON.stringify(data)
         })
         return response.json();
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
-async function putEmployee(id, data={}){
-    try{
-        const response = await fetch(url+id,{
-            method:"POST",
+async function putEmployee(id, data = {}) {
+    try {
+        const response = await fetch(url + "/" + id, {
+            method: "PUT",
             mode: "cors",
             cache: "no-cache",
             credentials: "same-origin",
-            headers:{
-                "Content-Type": "application/json"
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
             },
             redirect: "follow",
-            referrerPolicy: "no-referrer"
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify(data)
         });
         return response.json();
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
-async function deleteEmployee(id){
-    try{
-        const response = await fetch(url+id, {
+async function deleteEmployee(id) {
+    try {
+        const response = await fetch(url + "/" + id, {
             method: "DELETE",
             mode: "cors",
             cache: "no-cache",
@@ -198,7 +211,7 @@ async function deleteEmployee(id){
             referrerPolicy: "no-referrer"
         });
         return response.json();
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
