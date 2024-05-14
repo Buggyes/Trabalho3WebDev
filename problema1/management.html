@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="managementStyle" href="style.css" />
+    <link rel="stylesheet" href="management.css" />
     <script src="management.js"></script>
     <title>Problema 1</title>
 </head>
-    <body>
+
+<body>
+    <header>
+        <img src="icon.png" alt="icon" class="icon">
+        <h1>Employee Management Service</h1>
+    </header>
+    <div class="container">
         <form>
-            <p>Name:</p>
+            <h3>Name:</h3>
             <input type="text" id="nameForm"><br>
-            <p>Salary:</p>
+            <h3>Salary:</h3>
             <input type="number" id="salaryForm"><br>
-            <p>Age:</p>
+            <h3>Age:</h3>
             <input type="number" id="ageForm"><br>
             <button type="button" onclick="addEmployee()">Add Employee</button>
         </form>
@@ -25,5 +31,10 @@
                 <th>Options</th>
             </tr>
         </table>
-    </body>
+    </div>
+    <footer>
+        <h3>Matheus Eduardo dos Santos</h3>
+    </footer>
+</body>
+
 </html>

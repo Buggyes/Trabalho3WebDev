@@ -1,7 +1,61 @@
-.empTable th,
-.empTable td, 
-.empTable tr{
+header{
+    display: flex;
+    background-color: rgb(35, 35, 35);
+    margin: -8px;
+    padding: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 4px solid rgb(200, 55, 55);
+}
+
+header h1{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body{
+    min-height: 98.31%;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    display: grid;
+    margin-top: auto;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: -8px;
+    background-color: rgb(35, 35, 35);
+    padding: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 4px solid rgb(200, 55, 55);
+}
+
+footer h3{
+    color: white;
+    justify-self: center;
+}
+
+.container{
+    padding: 2%;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.icon{
+    height: 60px;
+    width: 60px;
+    filter: invert(100%);
+}
+
+.empTable th{
     padding: 5px;
-    outline-width: 2px;
-    outline-color: black;
+    border-bottom: 2px dotted grey;
+}
+
+.empTable td{
+    padding-left: 30px;
+    padding-right: 30px;
 }
