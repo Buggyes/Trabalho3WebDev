@@ -2,5 +2,6 @@
 .empTable td, 
 .empTable tr{
     padding: 5px;
-    outline: 1px black;
+    outline-width: 2px;
+    outline-color: black;
 }
