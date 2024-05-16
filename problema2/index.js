@@ -32,7 +32,7 @@ async function loadFeed() {
 
 async function searchGifs() {
     let feed = document.getElementById('feed');
-    let keywords = document.getElementById("searchBar");
+    let keywords = document.getElementById("searchBar").value;
     let request = await getGifsByKeyword(keywords);
     let found = request.data;
     while (feed.firstChild) {
