@@ -44,7 +44,7 @@ footer h3{
 button{
     color: white;
     background-color: rgb(35, 35, 35);
-    outline: 0px;
+    outline: none;
 }
 
 .container{

@@ -24,11 +24,35 @@ img{
 }
 
 button{
-    outline-width: 0px;
+    outline: none;
     background-color: white;
+}
+
+footer{
+    display: grid;
+    margin-top:17.2%;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: -8px;
+    background-color: rgb(35, 35, 35);
+    padding: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 4px solid rgb(55, 55, 55);
+}
+
+footer h3{
+    color: white;
+    justify-self: center;
 }
 
 .container{
     display: grid;
     justify-content: center;
+}
+
+.gifContainer{
+    padding-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(35, 35, 35);
 }
