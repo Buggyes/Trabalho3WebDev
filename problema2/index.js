@@ -1,21 +1,22 @@
 const url = "https://api.giphy.com/v1/";
+const apiKey = "DM74601Ekag430QSLQlRG0DZLu9dPXAj";
 
 document.addEventListener('DOMContentLoaded', function () {
     initFeed();
 })
 
 async function initFeed() {
-    trending = getTrendingGifs()
-    for (let i = 0; i < trending.length; i++) {
-        console.log(trending[i]);
+    let trending = await getTrendingGifs()
+    for (let i = 0; i < trending.data.length; i++) {
+        console.log(trending.data[i]);
     }
 }
 
 async function getTrendingGifs() {
     try {
         const response = await fetch(url + "gifs/trending?" + new URLSearchParams({
-            api_key: "DM74601Ekag430QSLQlRG0DZLu9dPXAj",
-            limit: 100,
+            api_key: apiKey,
+            limit: 20,
         }).toString(),
             {
                 method: "GET",
@@ -24,8 +25,7 @@ async function getTrendingGifs() {
                     "Content-Type": "application/json"
                 },
             })
-        .then((response) => response.json())
-        .then((data) => {return data})
+        return response.json();
     } catch (error) {
         console.log(error);
     }
@@ -34,9 +34,9 @@ async function getTrendingGifs() {
 async function searchGifs(word) {
     try {
         const response = await fetch(url + "gifs/search?" + new URLSearchParams({
-            api_key: "DM74601Ekag430QSLQlRG0DZLu9dPXAj",
+            api_key: apiKey,
             q: word,
-            limit: 50,
+            limit: 20,
         }).toString(),
             {
                 method: "GET",
@@ -45,7 +45,7 @@ async function searchGifs(word) {
                     "Content-Type": "application/json"
                 },
             });
-        return response.json().data;
+        return response.json();
     } catch (error) {
         console.log(error);
     }
