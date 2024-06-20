@@ -56,10 +56,12 @@ async function initEmployeeTable() {
                 editBtnText.remove();
                 saveBtnText = document.createTextNode('Save');
                 editBtn.appendChild(saveBtnText);
+                deleteBtnText.remove();
+                cancelBtnText = document.createTextNode('Cancel');
+                deleteBtn.appendChild(cancelBtnText);
             }
-            else if (editing == true && emps[i].id != beingEdited) {
+            else if (editing == true && emps[i].id != beingEdited)
                 location.reload()
-            }
             else {
                 editing = false;
 
@@ -71,24 +73,34 @@ async function initEmployeeTable() {
                 let newSalary = salaryInput.value;
                 let newAge = ageInput.value;
 
-                await putEmployee(emps[i].id,
-                    {
-                        id: emps[i].id,
-                        name: newName,
-                        salary: newSalary,
-                        age: newAge
-                    })
-
-                window.location.reload();
+                if(newAge < 18){
+                    window.alert("O funcionário precisa ser maior de idade!");
+                    editing = true;
+                }
+                else{
+                    await putEmployee(emps[i].id,
+                        {
+                            id: emps[i].id,
+                            name: newName,
+                            salary: newSalary,
+                            age: newAge
+                        })
+                    window.location.reload();
+                }
             }
         });
 
         deleteBtn.addEventListener('click', async function () {
-            let id = emps[i].id;
-            let dTray = document.getElementById(id);
-            dTray.remove();
+            if (editing == true) {
+                window.location.reload();
+            }
+            else{
+                let id = emps[i].id;
+                let dTray = document.getElementById(id);
+                dTray.remove();
 
-            await deleteEmployee(id);
+                await deleteEmployee(id);
+            }
         })
 
         name.appendChild(nameTxt);
@@ -114,9 +126,14 @@ async function addEmployee() {
     let salary = document.getElementById("salaryForm").value;
     let age = document.getElementById("ageForm").value;
 
-    await postEmployee({ name: name, salary: salary, age: age })
-
-    window.location.href = 'management.html';
+    if(age < 18)
+        window.alert("O funcionário precisa ser maior de idade!");
+    else{
+        await postEmployee({ name: name, salary: salary, age: age })
+        .then(
+            window.location.reload()
+        );
+    }
 }
 
 async function getAllEmployees() {
