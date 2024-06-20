@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/employees';
+const dbUrl = 'http://localhost:3000/employees';
 var editing = false;
 var beingEdited = 0;
 
@@ -121,7 +121,7 @@ async function addEmployee() {
 
 async function getAllEmployees() {
     try {
-        const response = await fetch(url, {
+        const response = await fetch(dbUrl, {
             method: "GET",
             mode: "cors",
             cache: "no-cache",
@@ -140,7 +140,7 @@ async function getAllEmployees() {
 
 async function getEmployee(id) {
     try {
-        const response = await fetch(url + "/" + id, {
+        const response = await fetch(dbUrl + "/" + id, {
             method: "GET",
             mode: "cors",
             cache: "no-cache",
@@ -159,7 +159,7 @@ async function getEmployee(id) {
 
 async function postEmployee(data = {}) {
     try {
-        const response = await fetch(url, {
+        const response = await fetch(dbUrl, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -179,7 +179,7 @@ async function postEmployee(data = {}) {
 
 async function putEmployee(id, data = {}) {
     try {
-        const response = await fetch(url + "/" + id, {
+        const response = await fetch(dbUrl + "/" + id, {
             method: "PUT",
             mode: "cors",
             cache: "no-cache",
@@ -199,7 +199,7 @@ async function putEmployee(id, data = {}) {
 
 async function deleteEmployee(id) {
     try {
-        const response = await fetch(url + "/" + id, {
+        const response = await fetch(dbUrl + "/" + id, {
             method: "DELETE",
             mode: "cors",
             cache: "no-cache",
